@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  load_balancer:
+    build:
+      context: .
+      dockerfile: Dockerfile.load-balancer
+    ports:
+      - "5000:5000"
+    depends_on:
+      - server1
+      - server2
+      - server3
+
+  server1:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    environment:
+      - UNIQUE_ID=server1
+    ports:
+      - "5001:5000"
+
+  server2:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    environment:
+      - UNIQUE_ID=server2
+    ports:
+      - "5002:5000"
+
+  server3:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    environment:
+      - UNIQUE_ID=server3
+    ports:
+      - "5003:5000"
