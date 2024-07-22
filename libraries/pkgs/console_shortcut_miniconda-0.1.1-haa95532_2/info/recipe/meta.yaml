@@ -1,0 +1,31 @@
+# This file created by conda-build 24.5.1
+# meta.yaml template originally from:
+# C:\b\abs_64_49e6m_y\clone\recipe, last modified Fri Jun 21 20:25:40 2024
+# ------------------------------------------------
+
+package:
+  name: console_shortcut_miniconda
+  version: 0.1.1
+build:
+  number: '2'
+  string: haa95532_2
+requirements:
+  build: []
+  run:
+    - python
+  run_constrained:
+    - anaconda-navigator >=1.9.8
+app:
+  entry: start cmd.exe /K "${CONDA_ROOT_PREFIX}\\Scripts\\activate.bat" "${CONDA_PREFIX}"
+  summary: Anaconda Powershell Prompt
+  type: desk
+about:
+  license: BSD-3-Clause
+  license_family: BSD
+  summary: Console shortcut creator for Windows (using menuinst)
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: 6477851e-1916-43d7-a403-fc5e9b23e6e5
+  remote_url: git@github.com:AnacondaRecipes/console_shortcut_miniconda-feedstock.git
+  sha: 6c7670d338322ad9c101aeb0c14c2ce6a997c29c

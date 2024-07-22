@@ -1,0 +1,19 @@
+{
+  "build": "py312haa95532_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/win-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.12,<3.13.0a0"
+  ],
+  "fn": "boltons-23.0.0-py312haa95532_0.conda",
+  "license": "BSD-3-Clause",
+  "md5": "df8555106ebda0bfb7e873a2899e1e50",
+  "name": "boltons",
+  "sha256": "6c04e27b25c74932f6710a7f73819022ad6ab671cd9e562f029eb3707e9d05eb",
+  "size": 480124,
+  "subdir": "win-64",
+  "timestamp": 1699480473000,
+  "url": "https://repo.anaconda.com/pkgs/main/win-64/boltons-23.0.0-py312haa95532_0.conda",
+  "version": "23.0.0"
+}

@@ -1,0 +1,23 @@
+{
+  "build": "hd43e919_2",
+  "build_number": 2,
+  "channel": "https://repo.anaconda.com/pkgs/main/win-64",
+  "constrains": [],
+  "depends": [
+    "lz4-c >=1.9.4,<1.10.0a0",
+    "vc >=14.1,<15.0a0",
+    "vs2015_runtime >=14.16.27012,<15.0a0",
+    "xz >=5.4.6,<6.0a0",
+    "zlib >=1.2.13,<1.3.0a0"
+  ],
+  "fn": "zstd-1.5.5-hd43e919_2.conda",
+  "license": "BSD-3-Clause AND GPL-2.0-or-later",
+  "md5": "d662b0ef9ecc4dfef56cfae98a2bb7db",
+  "name": "zstd",
+  "sha256": "01cba6d8563cad2bf4b6e26ba8fa59221e47b9d2cd65249554a8afe5fe7cae0c",
+  "size": 737167,
+  "subdir": "win-64",
+  "timestamp": 1714679197000,
+  "url": "https://repo.anaconda.com/pkgs/main/win-64/zstd-1.5.5-hd43e919_2.conda",
+  "version": "1.5.5"
+}

@@ -1,0 +1,11 @@
+prefix=D:/customizableLoadBalancer/libraries/Library 
+exec_prefix=D:/customizableLoadBalancer/libraries/Library 
+libdir=D:/customizableLoadBalancer/libraries/Library/lib 
+includedir=D:/customizableLoadBalancer/libraries/Library/include 
+modules=0 
+Name: libXML 
+Version: 2.10.4 
+Description: libXML library version2. 
+Requires: 
+Libs: -LD:/customizableLoadBalancer/libraries/Library/lib -lxml2 -liconv -lz 
+Cflags: -ID:/customizableLoadBalancer/libraries/Library/include/libxml 

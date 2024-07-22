@@ -1,0 +1,77 @@
+# This file created by conda-build 24.5.1
+# meta.yaml template originally from:
+# C:\b\abs_05pyen_6h9\clone\recipe, last modified Fri Jun 14 18:07:20 2024
+# ------------------------------------------------
+
+package:
+  name: openssl
+  version: 3.0.14
+source:
+  sha256: eeca035d4dd4e84fc25846d952da6297484afa0650a6f84c682e39df3a4123ca
+  url: https://www.openssl.org/source/openssl-3.0.14.tar.gz
+build:
+  binary_has_prefix_files: null
+  detect_binary_files_with_prefix: true
+  number: '0'
+  run_exports:
+    - openssl >=3.0.14,<4.0a0
+  string: h827c3e9_0
+requirements:
+  build:
+    - nasm 2.14.02 h7edc060_0
+    - perl 5.26.2.1 h0c8e037_0
+    - vs2015_runtime 14.29.30133 h43f2093_3
+    - vs2019_win-64 19.29.30154 h96f319f_3
+    - vswhere 2.8.4 haa95532_0
+  host:
+    - vc 14.2 h2eaa2aa_1
+    - vs2015_runtime 14.29.30133 h43f2093_3
+  run:
+    - ca-certificates
+    - vc >=14.2,<15.0a0
+    - vs2015_runtime >=14.29.30133,<15.0a0
+test:
+  commands:
+    - copy NUL checksum.txt
+    - openssl sha256 checksum.txt
+    - openssl ecparam -name prime256v1
+    - if "%SSL_CERT_FILE%"=="" exit 1
+    - if not exist "%SSL_CERT_FILE%" exit 1
+    - python -c "import urllib.request; urllib.request.urlopen('https://pypi.org')"
+    - pkg-config --print-errors --exact-version "3.0.14" openssl
+  requires:
+    - pkg-config
+    - python 3.8.*
+about:
+  description: 'OpenSSL is a robust, commercial-grade, full-featured Open Source Toolkit
+
+    for the Transport Layer Security (TLS) protocol formerly known as the
+
+    Secure Sockets Layer (SSL) protocol. The protocol implementation is based
+
+    on a full-strength general purpose cryptographic library, which can also
+
+    be used stand-alone.
+
+    '
+  dev_url: https://github.com/openssl/openssl
+  doc_url: https://www.openssl.org/docs/man3.0/
+  home: https://www.openssl.org/
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE.txt
+  summary: OpenSSL is an open-source implementation of the SSL and TLS protocols
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: 05950832-44d8-48dd-9414-34dc4d79e37f
+  recipe-maintainers:
+    - carlodri
+    - chenghlee
+    - jakirkham
+    - jjhelmus
+    - msarahan
+    - ocefpaf
+    - pelson
+  remote_url: git@github.com:AnacondaRecipes/openssl-feedstock.git
+  sha: 04ca6c3fc46037028a62bc6b11c2e1bdec32f5d1

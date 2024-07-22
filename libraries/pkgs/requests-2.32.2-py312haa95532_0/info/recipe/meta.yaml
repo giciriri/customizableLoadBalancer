@@ -1,0 +1,82 @@
+# This file created by conda-build 24.5.0
+# meta.yaml template originally from:
+# C:\b\abs_9c5n24p1y7\clone\recipe, last modified Tue May 28 14:27:25 2024
+# ------------------------------------------------
+
+package:
+  name: requests
+  version: 2.32.2
+source:
+  sha256: dd951ff5ecf3e3b3aa26b40703ba77495dab41da839ae72ef3c8e5d8e2433289
+  url: https://pypi.io/packages/source/r/requests/requests-2.32.2.tar.gz
+build:
+  number: '0'
+  script: C:\\b\\abs_9c5n24p1y7\\croot\\requests_1716902867639\\_h_env\\python.exe
+    -m pip install . --no-deps --no-build-isolation -vv
+  string: py312haa95532_0
+requirements:
+  host:
+    - bzip2 1.0.8 h2bbff1b_6
+    - ca-certificates 2024.3.11 haa95532_0
+    - expat 2.6.2 hd77b12b_0
+    - libffi 3.4.4 hd77b12b_1
+    - openssl 3.0.13 h2bbff1b_2
+    - pip 24.0 py312haa95532_0
+    - python 3.12.3 h1d929f7_1
+    - setuptools 69.5.1 py312haa95532_0
+    - sqlite 3.45.3 h2bbff1b_0
+    - tk 8.6.14 h0416ee5_0
+    - tzdata 2024a h04d1e81_0
+    - vc 14.2 h2eaa2aa_1
+    - vs2015_runtime 14.29.30133 h43f2093_3
+    - wheel 0.43.0 py312haa95532_0
+    - xz 5.4.6 h8cc25b3_1
+    - zlib 1.2.13 h8cc25b3_1
+  run:
+    - certifi >=2017.4.17
+    - charset-normalizer >=2,<4
+    - idna >=2.5,<4
+    - python >=3.12,<3.13.0a0
+    - urllib3 >=1.21.1,<3
+  run_constrained:
+    - chardet >=3.0.2,<6
+    - pysocks >=1.5.6,!=1.5.7
+test:
+  commands:
+    - pip check
+    - conda create -v --dry-run -n requests-test numpy
+  imports:
+    - requests
+  requires:
+    - conda
+    - pip
+about:
+  description: 'Requests is the only Non-GMO HTTP library for Python, safe for human
+
+    consumption.
+
+    '
+  dev_url: https://github.com/psf/requests
+  doc_url: https://requests.readthedocs.io/
+  home: https://requests.readthedocs.io/
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: "Requests is an elegant and simple HTTP library for Python, built with\
+    \ \u2665."
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: 9c5eff6d-46bc-4599-bc2b-c9b973137010
+  recipe-maintainers:
+    - carlodri
+    - jakirkham
+    - kalefranz
+    - mcg1969
+    - mingwandroid
+    - msarahan
+    - ocefpaf
+    - pelson
+    - sigmavirus24
+  remote_url: git@github.com:AnacondaRecipes/requests-feedstock.git
+  sha: 2d7562ff528e468cc7119df0ad0f9ba9edc86aa8

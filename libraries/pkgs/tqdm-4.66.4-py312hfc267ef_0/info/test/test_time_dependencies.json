@@ -1,0 +1,1 @@
+["rich", "pytest-xdist", "ripgrep", "dask-core", "pytest-asyncio", "pytest >=6", "pip", "numpy", "pytest-timeout", "pandas"]

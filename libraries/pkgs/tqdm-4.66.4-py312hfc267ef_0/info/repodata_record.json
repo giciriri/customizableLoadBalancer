@@ -1,0 +1,22 @@
+{
+  "build": "py312hfc267ef_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/win-64",
+  "constrains": [
+    "ipywidgets >=6"
+  ],
+  "depends": [
+    "colorama",
+    "python >=3.12,<3.13.0a0"
+  ],
+  "fn": "tqdm-4.66.4-py312hfc267ef_0.conda",
+  "license": "MPL-2.0 AND MIT",
+  "md5": "bb58a6639a07a7e12f1c7dfb91e5f9c3",
+  "name": "tqdm",
+  "sha256": "790533998227c1a62a104f818537d713bd034c6b2fbbc1b4045da196e942c2c1",
+  "size": 192402,
+  "subdir": "win-64",
+  "timestamp": 1716396559000,
+  "url": "https://repo.anaconda.com/pkgs/main/win-64/tqdm-4.66.4-py312hfc267ef_0.conda",
+  "version": "4.66.4"
+}

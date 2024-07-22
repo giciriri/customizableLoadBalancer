@@ -1,0 +1,13 @@
+prefix=D:/customizableLoadBalancer/libraries/Library
+exec_prefix=D:/customizableLoadBalancer/libraries/Library
+libdir=D:/customizableLoadBalancer/libraries/Library/lib
+sharedlibdir=D:/customizableLoadBalancer/libraries/Library/lib
+includedir=D:/customizableLoadBalancer/libraries/Library/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}

@@ -1,0 +1,20 @@
+{
+  "build": "hd77b12b_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/win-64",
+  "constrains": [],
+  "depends": [
+    "vc >=14.1,<15.0a0",
+    "vs2015_runtime >=14.16.27012,<15.0a0"
+  ],
+  "fn": "expat-2.6.2-hd77b12b_0.conda",
+  "license": "MIT",
+  "md5": "89b98f49e4655a7215952bf44683315c",
+  "name": "expat",
+  "sha256": "c913f03186ec4dd2feb012d37e446f9f400c398a160f42226319a3c20aa8051f",
+  "size": 266137,
+  "subdir": "win-64",
+  "timestamp": 1713531146000,
+  "url": "https://repo.anaconda.com/pkgs/main/win-64/expat-2.6.2-hd77b12b_0.conda",
+  "version": "2.6.2"
+}

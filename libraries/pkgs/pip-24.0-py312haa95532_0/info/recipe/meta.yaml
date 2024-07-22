@@ -1,0 +1,76 @@
+# This file created by conda-build 24.3.0
+# meta.yaml template originally from:
+# C:\b\abs_06ztt1waa3\clone\recipe, last modified Tue May  7 16:50:19 2024
+# ------------------------------------------------
+
+package:
+  name: pip
+  version: '24.0'
+source:
+  sha256: ea9bd1a847e8c5774a5777bb398c19e80bcd4e2aa16a4b301b718fe6f593aba2
+  url: https://pypi.io/packages/source/p/pip/pip-24.0.tar.gz
+build:
+  disable_pip: true
+  entry_points:
+    - pip = pip._internal.cli.main:main
+    - pip3 = pip._internal.cli.main:main
+  number: '0'
+  string: py312haa95532_0
+requirements:
+  host:
+    - bzip2 1.0.8 h2bbff1b_6
+    - ca-certificates 2024.3.11 haa95532_0
+    - expat 2.6.2 hd77b12b_0
+    - libffi 3.4.4 hd77b12b_1
+    - openssl 3.0.13 h2bbff1b_1
+    - python 3.12.3 h1d929f7_1
+    - setuptools 69.5.1 py312haa95532_0
+    - sqlite 3.45.3 h2bbff1b_0
+    - tk 8.6.14 h0416ee5_0
+    - tzdata 2024a h04d1e81_0
+    - vc 14.2 h21ff451_1
+    - vs2015_runtime 14.27.29016 h5e58377_2
+    - wheel 0.43.0 py312haa95532_0
+    - xz 5.4.6 h8cc25b3_1
+    - zlib 1.2.13 h8cc25b3_1
+  run:
+    - python >=3.12,<3.13.0a0
+    - setuptools
+    - wheel
+test:
+  commands:
+    - pip -h
+    - pip list
+  imports:
+    - pip
+about:
+  description: 'pip is the package installer for Python.
+
+    You can use pip to install packages from the Python Package
+
+    Index and other indexes.
+
+    '
+  dev_url: https://github.com/pypa/pip
+  doc_url: https://pip.pypa.io
+  home: https://pip.pypa.io
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE.txt
+  summary: PyPA recommended tool for installing Python packages
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: 061c99e4-77c1-47d1-88be-08c89d29c723
+  recipe-maintainers:
+    - jakirkham
+    - mingwandroid
+    - msarahan
+    - ocefpaf
+    - pelson
+  remote_url: git@github.com:AnacondaRecipes/pip-feedstock.git
+  sha: 8fb50767012d80c83214a3d1af7adbae1612a2a0
+  skip-lints:
+    - missing_pip_check
+    - python_build_tool_in_run
+    - uses_setup_py

@@ -1,0 +1,19 @@
+{
+  "build": "py312haa95532_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/win-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.12,<3.13.0a0"
+  ],
+  "fn": "setuptools-69.5.1-py312haa95532_0.conda",
+  "license": "MIT",
+  "md5": "10f46649ca13193ae7f69fa927abf4a3",
+  "name": "setuptools",
+  "sha256": "f65e0bb6d032041f268608a70d21ba0ab4441fd2071122dcbd500a236b651735",
+  "size": 1346905,
+  "subdir": "win-64",
+  "timestamp": 1715025936000,
+  "url": "https://repo.anaconda.com/pkgs/main/win-64/setuptools-69.5.1-py312haa95532_0.conda",
+  "version": "69.5.1"
+}

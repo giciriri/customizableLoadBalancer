@@ -1,0 +1,7 @@
+{
+  "runtime_version": "14.29.30133",
+  "target_platform": "win-64",
+  "cl_version": "19.29.30154",
+  "update_version": "11",
+  "channel_targets": "defaults"
+}

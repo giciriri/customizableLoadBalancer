@@ -1,0 +1,72 @@
+# This file created by conda-build 24.3.0
+# meta.yaml template originally from:
+# C:\b\abs_bcjhe00r33\clone\recipe, last modified Fri May  3 07:16:36 2024
+# ------------------------------------------------
+
+package:
+  name: wheel
+  version: 0.43.0
+source:
+  sha256: 465ef92c69fa5c5da2d1cf8ac40559a8c940886afcef87dcf14b9470862f1d85
+  url: https://pypi.io/packages/source/w/wheel/wheel-0.43.0.tar.gz
+build:
+  entry_points:
+    - wheel = wheel.cli:main
+  number: '0'
+  string: py312haa95532_0
+requirements:
+  host:
+    - bzip2 1.0.8 h2bbff1b_6
+    - ca-certificates 2024.3.11 haa95532_0
+    - expat 2.6.2 hd77b12b_0
+    - flit-core 3.9.0 py312he100be2_1
+    - libffi 3.4.4 hd77b12b_1
+    - openssl 3.0.13 h2bbff1b_1
+    - python 3.12.3 h1d929f7_0
+    - python-installer 0.7.0 py312haa95532_0
+    - sqlite 3.45.3 h2bbff1b_0
+    - tk 8.6.12 h2bbff1b_0
+    - tzdata 2024a h04d1e81_0
+    - vc 14.2 h21ff451_1
+    - vs2015_runtime 14.27.29016 h5e58377_2
+    - xz 5.4.6 h8cc25b3_1
+    - zlib 1.2.13 h8cc25b3_1
+  run:
+    - python >=3.12,<3.13.0a0
+test:
+  commands:
+    - pip check
+    - wheel --help
+    - wheel version
+  imports:
+    - wheel
+    - wheel.cli
+    - wheel.vendored
+    - wheel.vendored.packaging
+  requires:
+    - pip
+about:
+  description: "This library is the reference implementation of the Python wheel packaging\
+    \ standard,\nas defined in PEP 427.\nIt has two different roles:\n  1. A setuptools\
+    \ extension for building wheels that provides the bdist_wheel setuptools command\n\
+    \  2. A command line tool for working with wheel files\n"
+  dev_url: https://github.com/pypa/wheel
+  doc_url: https://wheel.readthedocs.io/
+  home: https://github.com/pypa/wheel
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE.txt
+  summary: A built-package format for Python.
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: bc348ea8-c3f1-4460-aca0-879eb92fde4a
+  recipe-maintainers:
+    - jakirkham
+    - mingwandroid
+    - ocefpaf
+    - pelson
+  remote_url: git@github.com:AnacondaRecipes/wheel-feedstock.git
+  sha: 6008a9de39dc8e51f369a2ab05d122451ef07532
+  skip-lints:
+    - missing_wheel

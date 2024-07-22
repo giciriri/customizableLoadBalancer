@@ -1,0 +1,15 @@
+{
+  "arch": "x86_64",
+  "build": "py312haa95532_0",
+  "build_number": 0,
+  "depends": [
+    "python >=3.12,<3.13.0a0"
+  ],
+  "license": "LGPL-3.0-only",
+  "license_family": "LGPL",
+  "name": "frozendict",
+  "platform": "win",
+  "subdir": "win-64",
+  "timestamp": 1713195176625,
+  "version": "2.4.2"
+}

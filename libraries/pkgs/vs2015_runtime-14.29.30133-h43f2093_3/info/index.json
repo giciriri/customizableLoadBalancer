@@ -1,0 +1,11 @@
+{
+  "arch": "x86_64",
+  "build": "h43f2093_3",
+  "build_number": 3,
+  "depends": [],
+  "name": "vs2015_runtime",
+  "platform": "win",
+  "subdir": "win-64",
+  "timestamp": 1715797302913,
+  "version": "14.29.30133"
+}

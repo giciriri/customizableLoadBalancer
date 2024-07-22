@@ -1,0 +1,9 @@
+libdir=C:/b/abs_fadhk3ae7t/croot/libsolv-suite_1714484629168/_h_env/Library/lib
+includedir=C:/b/abs_fadhk3ae7t/croot/libsolv-suite_1714484629168/_h_env/Library/include
+
+Name: libsolvext
+Description: Library for reading repositories
+Version: 0.7.24
+Requires: libsolv
+Libs: -L${libdir} -lsolvext
+Cflags: -I${includedir}

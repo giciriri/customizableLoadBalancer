@@ -1,0 +1,6 @@
+{
+  "zstd": "1.5.2",
+  "c_compiler": "vs2017",
+  "target_platform": "win-64",
+  "channel_targets": "defaults"
+}

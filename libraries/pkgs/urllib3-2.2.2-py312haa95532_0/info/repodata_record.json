@@ -1,0 +1,26 @@
+{
+  "build": "py312haa95532_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/win-64",
+  "constrains": [
+    "zstandard >=0.18.0",
+    "requests >=2.26.0",
+    "selenium >=4.4.3",
+    "h2 >=4,<5"
+  ],
+  "depends": [
+    "brotli-python >=1.0.9",
+    "pysocks >=1.5.6,<2.0,!=1.5.7",
+    "python >=3.12,<3.13.0a0"
+  ],
+  "fn": "urllib3-2.2.2-py312haa95532_0.conda",
+  "license": "MIT",
+  "md5": "ec0af199819c3248aba96a363eea86e6",
+  "name": "urllib3",
+  "sha256": "379fb0ee5cecd591c1a27855f7c74dc4887d02ab5ab457ae74d0b9c4a3936885",
+  "size": 230441,
+  "subdir": "win-64",
+  "timestamp": 1718912804000,
+  "url": "https://repo.anaconda.com/pkgs/main/win-64/urllib3-2.2.2-py312haa95532_0.conda",
+  "version": "2.2.2"
+}

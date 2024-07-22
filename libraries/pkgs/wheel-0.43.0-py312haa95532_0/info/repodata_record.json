@@ -1,0 +1,19 @@
+{
+  "build": "py312haa95532_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/win-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.12,<3.13.0a0"
+  ],
+  "fn": "wheel-0.43.0-py312haa95532_0.conda",
+  "license": "MIT",
+  "md5": "d6d743e8736f34fe71eed504f2556541",
+  "name": "wheel",
+  "sha256": "1d22dbad0befa586a00287eddb3415bc82a60bbb462d14614520a33574bfb133",
+  "size": 171353,
+  "subdir": "win-64",
+  "timestamp": 1714717308000,
+  "url": "https://repo.anaconda.com/pkgs/main/win-64/wheel-0.43.0-py312haa95532_0.conda",
+  "version": "0.43.0"
+}

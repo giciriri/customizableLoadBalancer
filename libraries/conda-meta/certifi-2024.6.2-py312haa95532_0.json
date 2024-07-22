@@ -1,0 +1,49 @@
+{
+  "build": "py312haa95532_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/win-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.12,<3.13.0a0"
+  ],
+  "extracted_package_dir": "D:\\customizableLoadBalancer\\libraries\\pkgs\\certifi-2024.6.2-py312haa95532_0",
+  "files": [
+    "Lib/site-packages/certifi-2024.6.2.dist-info/INSTALLER",
+    "Lib/site-packages/certifi-2024.6.2.dist-info/LICENSE",
+    "Lib/site-packages/certifi-2024.6.2.dist-info/METADATA",
+    "Lib/site-packages/certifi-2024.6.2.dist-info/RECORD",
+    "Lib/site-packages/certifi-2024.6.2.dist-info/REQUESTED",
+    "Lib/site-packages/certifi-2024.6.2.dist-info/WHEEL",
+    "Lib/site-packages/certifi-2024.6.2.dist-info/direct_url.json",
+    "Lib/site-packages/certifi-2024.6.2.dist-info/top_level.txt",
+    "Lib/site-packages/certifi/__init__.py",
+    "Lib/site-packages/certifi/__main__.py",
+    "Lib/site-packages/certifi/__pycache__/__init__.cpython-312.pyc",
+    "Lib/site-packages/certifi/__pycache__/__main__.cpython-312.pyc",
+    "Lib/site-packages/certifi/__pycache__/core.cpython-312.pyc",
+    "Lib/site-packages/certifi/cacert.pem",
+    "Lib/site-packages/certifi/core.py",
+    "Lib/site-packages/certifi/py.typed",
+    ".nonadmin"
+  ],
+  "fn": "certifi-2024.6.2-py312haa95532_0.conda",
+  "license": "MPL-2.0",
+  "link": {
+    "source": "D:\\customizableLoadBalancer\\libraries\\pkgs\\certifi-2024.6.2-py312haa95532_0",
+    "type": 1
+  },
+  "md5": "adb79383fb8de3d4eb62b9b6486f6d3b",
+  "name": "certifi",
+  "package_tarball_full_path": "D:\\customizableLoadBalancer\\libraries\\pkgs\\certifi-2024.6.2-py312haa95532_0.conda",
+  "paths_data": {
+    "paths": [],
+    "paths_version": 1
+  },
+  "requested_spec": "defaults/win-64::certifi==2024.6.2=py312haa95532_0[md5=adb79383fb8de3d4eb62b9b6486f6d3b]",
+  "sha256": "cbbd19a6a47b25010f95366d831a389936bc683852444d138f0dfc6476dbab1d",
+  "size": 165530,
+  "subdir": "win-64",
+  "timestamp": 1717618333000,
+  "url": "https://repo.anaconda.com/pkgs/main/win-64/certifi-2024.6.2-py312haa95532_0.conda",
+  "version": "2024.6.2"
+}

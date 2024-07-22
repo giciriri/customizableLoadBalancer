@@ -1,0 +1,17 @@
+{
+  "build": "h43f2093_3",
+  "build_number": 3,
+  "channel": "https://repo.anaconda.com/pkgs/main/win-64",
+  "constrains": [],
+  "depends": [],
+  "fn": "vs2015_runtime-14.29.30133-h43f2093_3.conda",
+  "license": "",
+  "md5": "b5596ddb5240cdac00ac274ff85163c9",
+  "name": "vs2015_runtime",
+  "sha256": "eb19d1d2b9db51426e20cda6b1cde265b426180a74d6b4da44528f218c91bfe3",
+  "size": 1141428,
+  "subdir": "win-64",
+  "timestamp": 1715797302000,
+  "url": "https://repo.anaconda.com/pkgs/main/win-64/vs2015_runtime-14.29.30133-h43f2093_3.conda",
+  "version": "14.29.30133"
+}

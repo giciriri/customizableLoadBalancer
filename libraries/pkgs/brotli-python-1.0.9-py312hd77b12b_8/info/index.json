@@ -1,0 +1,16 @@
+{
+  "arch": "x86_64",
+  "build": "py312hd77b12b_8",
+  "build_number": 8,
+  "depends": [
+    "python >=3.12,<3.13.0a0",
+    "vc >=14.1,<15.0a0",
+    "vs2015_runtime >=14.16.27012,<15.0a0"
+  ],
+  "license": "MIT",
+  "name": "brotli-python",
+  "platform": "win",
+  "subdir": "win-64",
+  "timestamp": 1714483879727,
+  "version": "1.0.9"
+}

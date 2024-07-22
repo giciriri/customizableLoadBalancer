@@ -1,0 +1,23 @@
+{
+  "arch": "x86_64",
+  "build": "py312haa95532_0",
+  "build_number": 0,
+  "constrains": [
+    "zstandard >=0.18.0",
+    "requests >=2.26.0",
+    "selenium >=4.4.3",
+    "h2 >=4,<5"
+  ],
+  "depends": [
+    "brotli-python >=1.0.9",
+    "pysocks >=1.5.6,<2.0,!=1.5.7",
+    "python >=3.12,<3.13.0a0"
+  ],
+  "license": "MIT",
+  "license_family": "MIT",
+  "name": "urllib3",
+  "platform": "win",
+  "subdir": "win-64",
+  "timestamp": 1718912804835,
+  "version": "2.2.2"
+}

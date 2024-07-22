@@ -1,0 +1,11 @@
+{
+  "xz": "5",
+  "zstd": "1.5.2",
+  "openssl": "3.0",
+  "c_compiler": "vs2017",
+  "target_platform": "win-64",
+  "channel_targets": "defaults",
+  "zlib": "1.2",
+  "bzip2": "1.0",
+  "vc": "14"
+}

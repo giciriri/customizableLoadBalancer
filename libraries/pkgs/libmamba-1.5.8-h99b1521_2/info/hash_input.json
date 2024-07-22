@@ -1,0 +1,9 @@
+{
+  "channel_targets": "defaults",
+  "zstd": "1.5.2",
+  "libcurl": "8.1.1",
+  "cxx_compiler": "vs2019",
+  "target_platform": "win-64",
+  "openssl": "3.0",
+  "bzip2": "1.0"
+}

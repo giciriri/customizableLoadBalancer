@@ -1,0 +1,79 @@
+# This file created by conda-build 24.1.2
+# meta.yaml template originally from:
+# C:\b\abs_c3w_h1zzjg\clone\recipe, last modified Wed Mar 20 21:06:21 2024
+# ------------------------------------------------
+
+package:
+  name: anaconda-anon-usage
+  version: 0.4.4
+source:
+  sha256: 7c771b42a7c377d9c872929da986926869c433839ad5d3a793d02b9ee340b24c
+  url: https://github.com/anaconda/anaconda-anon-usage/archive/refs/tags/0.4.4.tar.gz
+build:
+  number: '100'
+  script_env:
+    - NEED_SCRIPTS=no
+  string: py312hfc23b7f_100
+requirements:
+  host:
+    - bzip2 1.0.8 h2bbff1b_5
+    - ca-certificates 2024.3.11 haa95532_0
+    - expat 2.5.0 hd77b12b_0
+    - libffi 3.4.4 hd77b12b_0
+    - openssl 3.0.13 h2bbff1b_0
+    - pip 23.3.1 py312haa95532_0
+    - python 3.12.2 h1d929f7_0
+    - setuptools 68.2.2 py312haa95532_0
+    - sqlite 3.41.2 h2bbff1b_0
+    - tk 8.6.12 h2bbff1b_0
+    - tzdata 2024a h04d1e81_0
+    - vc 14.2 h21ff451_1
+    - vs2015_runtime 14.27.29016 h5e58377_2
+    - wheel 0.41.2 py312haa95532_0
+    - xz 5.4.6 h8cc25b3_0
+    - zlib 1.2.13 h8cc25b3_0
+  run:
+    - python >=3.12,<3.13.0a0
+  run_constrained:
+    - conda >=23.7
+test:
+  commands:
+    - set ANACONDA_ANON_USAGE_DEBUG=1
+    - set PYTHONUNBUFFERED=1
+    - conda create -n testchild1 --yes
+    - conda create -n testchild2 --yes
+    - conda info
+    - conda info --envs
+    - pytest -v tests/unit
+    - python tests/integration/test_config.py
+  imports:
+    - anaconda_anon_usage
+  requires:
+    - conda >=23.7
+    - pytest
+    - pytest-cov
+  source_files:
+    - tests
+about:
+  description: 'This package augments the request header data that conda delivers
+
+    to package servers during index and package requests. Specifically,
+
+    three randomly generated tokens are appended to the "user agent"
+
+    that Conda already sends with each request.
+
+    '
+  dev_url: https://github.com/anaconda/anaconda-anon-usage/
+  doc_url: https://github.com/anaconda/anaconda-anon-usage/
+  home: https://github.com/anaconda/anaconda-anon-usage
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: basic anonymous telemetry for conda clients
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: c30a12db-63a0-4937-8e7d-fa513eb6629a
+  remote_url: git@github.com:AnacondaRecipes/anaconda-anon-usage-feedstock.git
+  sha: 239c2caf958cbd960bda3cd623a0f8f7fa9d2b66

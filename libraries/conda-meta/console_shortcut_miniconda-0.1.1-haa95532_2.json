@@ -1,0 +1,38 @@
+{
+  "build": "haa95532_2",
+  "build_number": 2,
+  "channel": "https://repo.anaconda.com/pkgs/main/win-64",
+  "constrains": [
+    "anaconda-navigator >=1.9.8"
+  ],
+  "depends": [
+    "python"
+  ],
+  "extracted_package_dir": "D:\\customizableLoadBalancer\\libraries\\pkgs\\console_shortcut_miniconda-0.1.1-haa95532_2",
+  "files": [
+    "Menu/anaconda_console.ico",
+    "Menu/console_shortcut.json",
+    ".nonadmin",
+    "Menu/console_shortcut.json"
+  ],
+  "fn": "console_shortcut_miniconda-0.1.1-haa95532_2.conda",
+  "license": "BSD-3-Clause",
+  "link": {
+    "source": "D:\\customizableLoadBalancer\\libraries\\pkgs\\console_shortcut_miniconda-0.1.1-haa95532_2",
+    "type": 1
+  },
+  "md5": "0bd4b8463e9d665f153bc4a2556a7163",
+  "name": "console_shortcut_miniconda",
+  "package_tarball_full_path": "D:\\customizableLoadBalancer\\libraries\\pkgs\\console_shortcut_miniconda-0.1.1-haa95532_2.conda",
+  "paths_data": {
+    "paths": [],
+    "paths_version": 1
+  },
+  "requested_spec": "defaults/win-64::console_shortcut_miniconda==0.1.1=haa95532_2[md5=0bd4b8463e9d665f153bc4a2556a7163]",
+  "sha256": "8490c4bf5fb951eb493415de0d735d28d954b05c480c8d4ce2d5c2ed1a306f68",
+  "size": 22670,
+  "subdir": "win-64",
+  "timestamp": 1718997970000,
+  "url": "https://repo.anaconda.com/pkgs/main/win-64/console_shortcut_miniconda-0.1.1-haa95532_2.conda",
+  "version": "0.1.1"
+}

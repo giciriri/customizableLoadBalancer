@@ -1,0 +1,17 @@
+{
+  "paths": [
+    {
+      "_path": "Menu/anaconda_console.ico",
+      "path_type": "hardlink",
+      "sha256": "c9476d926bbd0ce80a16bdfb676af18d6b8c1f4d0c2348bfab1416540563a283",
+      "size_in_bytes": 165935
+    },
+    {
+      "_path": "Menu/console_shortcut.json",
+      "path_type": "hardlink",
+      "sha256": "bfcaf901c56abd0bf255b26cd0b4bbccea55db5104a3de9f7b40865b451aa570",
+      "size_in_bytes": 368
+    }
+  ],
+  "paths_version": 1
+}

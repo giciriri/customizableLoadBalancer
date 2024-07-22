@@ -1,0 +1,7 @@
+{
+  "target_platform": "win-64",
+  "channel_targets": "defaults",
+  "openssl": "3.0",
+  "rust_compiler": "rust",
+  "rust_compiler_version": "1.71.1"
+}

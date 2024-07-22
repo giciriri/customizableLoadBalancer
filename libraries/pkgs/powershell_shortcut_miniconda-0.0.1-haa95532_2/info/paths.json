@@ -1,0 +1,17 @@
+{
+  "paths": [
+    {
+      "_path": "Menu/anaconda_powershell_console.ico",
+      "path_type": "hardlink",
+      "sha256": "476bfa437f59c865dfac2fda147b463d041cceda77f0a959a8b9f45ab6fa3090",
+      "size_in_bytes": 165702
+    },
+    {
+      "_path": "Menu/powershell_shortcut.json",
+      "path_type": "hardlink",
+      "sha256": "5ff67a6036f13d1ff59eec4001548ec4125f26c66a012d427dc13854a5ab8a63",
+      "size_in_bytes": 500
+    }
+  ],
+  "paths_version": 1
+}

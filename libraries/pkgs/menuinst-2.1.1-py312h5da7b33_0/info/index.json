@@ -1,0 +1,17 @@
+{
+  "arch": "x86_64",
+  "build": "py312h5da7b33_0",
+  "build_number": 0,
+  "depends": [
+    "python >=3.12,<3.13.0a0",
+    "vc >=14.2,<15.0a0",
+    "vs2015_runtime >=14.29.30133,<15.0a0"
+  ],
+  "license": "BSD-3-Clause AND MIT",
+  "license_family": "BSD",
+  "name": "menuinst",
+  "platform": "win",
+  "subdir": "win-64",
+  "timestamp": 1718132898657,
+  "version": "2.1.1"
+}

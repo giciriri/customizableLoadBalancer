@@ -1,0 +1,20 @@
+{
+  "build": "h8cc25b3_1",
+  "build_number": 1,
+  "channel": "https://repo.anaconda.com/pkgs/main/win-64",
+  "constrains": [],
+  "depends": [
+    "vc >=14.1,<15.0a0",
+    "vs2015_runtime >=14.16.27012,<15.0a0"
+  ],
+  "fn": "zlib-1.2.13-h8cc25b3_1.conda",
+  "license": "Zlib",
+  "md5": "1f7ea85632611b25599e4cddf5b51d7d",
+  "name": "zlib",
+  "sha256": "48eef468ca392090e6fe57c3ba54e3a7dc1412f9c417c248575d0717e9a5ed3d",
+  "size": 133776,
+  "subdir": "win-64",
+  "timestamp": 1714514792000,
+  "url": "https://repo.anaconda.com/pkgs/main/win-64/zlib-1.2.13-h8cc25b3_1.conda",
+  "version": "1.2.13"
+}

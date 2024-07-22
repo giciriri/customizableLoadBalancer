@@ -1,0 +1,65 @@
+# This file created by conda-build 24.3.0
+# ------------------------------------------------
+
+package:
+  name: libcurl
+  version: 8.7.1
+source:
+  sha256: 05bbd2b698e9cfbab477c33aa5e99b4975501835a41b7ca6ca71de03d8849e76
+  url: https://curl.se/download/curl-8.7.1.tar.bz2
+build:
+  ignore_run_exports:
+    - krb5
+  number: 0
+  run_exports:
+    - libcurl >=8.7.1,<9.0a0
+  string: h86230a5_0
+requirements:
+  build:
+    - vs2017_win-64 19.16.27032.1 hb4161e2_3
+    - vswhere 2.8.4 haa95532_0
+  host:
+    - ca-certificates 2024.3.11 haa95532_0
+    - krb5 1.20.1 h5b6d351_1
+    - libssh2 1.10.0 hcd4344a_2
+    - openssl 1.1.1w h2bbff1b_0
+    - vc 14.2 h21ff451_1
+    - vs2015_runtime 14.27.29016 h5e58377_2
+    - zlib 1.2.13 h8cc25b3_1
+  run:
+    - libssh2 >=1.10.0
+    - libssh2 >=1.10.0,<2.0a0
+    - vc >=14.1,<15.0a0
+    - vs2015_runtime >=14.16.27012,<15.0a0
+    - zlib >=1.2.13,<1.3.0a0
+test:
+  commands:
+    - if exist %LIBRARY_BIN%\curl.exe exit 1
+    - if exist %LIBRARY_LIB%\libcurl_a.lib exit 1
+    - if not exist %LIBRARY_BIN%\libcurl.dll exit 1
+about:
+  description: 'Curl is an open source command line tool and library for transferring
+    data
+
+    with URL syntax. It is used in command lines or scripts to transfer data.
+
+    '
+  dev_url: https://github.com/curl/curl
+  doc_url: https://curl.se/docs/
+  home: https://curl.se/
+  license: curl
+  license_family: MIT
+  license_url: https://curl.se/docs/copyright.html
+  summary: tool and library for transferring data with URL syntax
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: 9bff8ead-d061-4c87-983c-8973e62ef117
+  recipe-maintainers:
+    - jakirkham
+    - mingwandroid
+    - msarahan
+    - ocefpaf
+    - xylar
+  remote_url: git@github.com:AnacondaRecipes/curl-feedstock.git
+  sha: 5e2509c281cd2fcf2a66f185b47f08f69ae83be4

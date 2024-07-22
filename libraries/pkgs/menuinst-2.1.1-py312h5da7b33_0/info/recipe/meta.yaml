@@ -1,0 +1,120 @@
+# This file created by conda-build 24.5.1
+# meta.yaml template originally from:
+# C:\b\abs_e7zsrwvoy0\clone\recipe, last modified Tue Jun 11 20:02:15 2024
+# ------------------------------------------------
+
+package:
+  name: menuinst
+  version: 2.1.1
+source:
+  sha256: 38e44a19a5d1fbe48c779b6a3a8d789224d2b3708e8270ecf8575d2d442ef2e7
+  url: https://github.com/conda/menuinst/archive/2.1.1.tar.gz
+build:
+  missing_dso_whitelist: null
+  number: '0'
+  script:
+    - del /q "C:\b\abs_e7zsrwvoy0\croot\menuinst_1718132546150\work\\menuinst\\data\\osx_launcher_*"
+    - del /q "C:\b\abs_e7zsrwvoy0\croot\menuinst_1718132546150\work\\menuinst\\data\\appkit_launcher_*"
+    - C:\\b\\abs_e7zsrwvoy0\\croot\\menuinst_1718132546150\\_h_env\\python.exe -m
+      pip install . -vv --no-build-isolation --no-deps
+    - copy "%SP_DIR%\\menuinst\\_legacy\cwp.py" "%PREFIX%\\"
+  script_env:
+    - SETUPTOOLS_SCM_PRETEND_VERSION=2.1.1
+  skip_compile_pyc:
+    - cwp.py
+  string: py312h5da7b33_0
+requirements:
+  build:
+    - bzip2 1.0.8 h2bbff1b_6
+    - ca-certificates 2024.3.11 haa95532_0
+    - expat 2.6.2 hd77b12b_0
+    - libffi 3.4.4 hd77b12b_1
+    - openssl 3.0.13 h2bbff1b_2
+    - python 3.12.3 h1d929f7_1
+    - sqlite 3.45.3 h2bbff1b_0
+    - tk 8.6.14 h0416ee5_0
+    - tzdata 2024a h04d1e81_0
+    - vc 14.2 h2eaa2aa_1
+    - vs2015_runtime 14.29.30133 h43f2093_3
+    - vs2019_win-64 19.29.30154 h96f319f_3
+    - vswhere 2.8.4 haa95532_0
+    - xz 5.4.6 h8cc25b3_1
+    - zlib 1.2.13 h8cc25b3_1
+  host:
+    - bzip2 1.0.8 h2bbff1b_6
+    - ca-certificates 2024.3.11 haa95532_0
+    - expat 2.6.2 hd77b12b_0
+    - libffi 3.4.4 hd77b12b_1
+    - openssl 3.0.13 h2bbff1b_2
+    - packaging 23.2 py312haa95532_0
+    - pip 24.0 py312haa95532_0
+    - python 3.12.3 h1d929f7_1
+    - setuptools 69.5.1 py312haa95532_0
+    - setuptools-scm 8.0.4 py312haa95532_0
+    - setuptools_scm 8.0.4 hd3eb1b0_0
+    - sqlite 3.45.3 h2bbff1b_0
+    - tk 8.6.14 h0416ee5_0
+    - typing-extensions 4.11.0 py312haa95532_0
+    - typing_extensions 4.11.0 py312haa95532_0
+    - tzdata 2024a h04d1e81_0
+    - vc 14.2 h2eaa2aa_1
+    - vs2015_runtime 14.29.30133 h43f2093_3
+    - wheel 0.43.0 py312haa95532_0
+    - xz 5.4.6 h8cc25b3_1
+    - zlib 1.2.13 h8cc25b3_1
+  run:
+    - python >=3.12,<3.13.0a0
+    - vc >=14.2,<15.0a0
+    - vs2015_runtime >=14.29.30133,<15.0a0
+test:
+  commands:
+    - pip check
+    - pytest tests/ -vvv --ignore=tests/test_schema.py --ignore=tests/test_elevation.py
+  imports:
+    - menuinst
+    - menuinst._legacy
+    - menuinst.api
+    - menuinst.platforms.win_utils.winshortcut
+  requires:
+    - conda
+    - pip
+    - pydantic
+    - pytest
+    - pytest-mock
+  source_files:
+    - tests
+about:
+  description: 'This package provides cross platform menu item installation for conda
+    packages.
+
+
+    If a conda package ships a menuinst JSON document under $PREFIX/Menu, conda will
+    invoke
+
+    menuinst to process the JSON file and install the menu items in your operating
+    system.
+
+    The menu items are removed when the package is uninstalled.
+
+    '
+  dev_url: https://github.com/conda/menuinst/
+  doc_url: https://conda.github.io/menuinst/
+  home: https://github.com/conda/menuinst/
+  license: BSD-3-Clause AND MIT
+  license_family: BSD
+  license_file:
+    - LICENSE.txt
+    - menuinst/_vendor/apipkg/LICENSE
+  summary: cross platform install of menu items
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: e7c78036-51cc-4807-a178-fda260df9ec8
+  recipe-maintainers:
+    - carlodri
+    - goanpeca
+    - isuruf
+    - jaimergp
+    - jakirkham
+  remote_url: git@github.com:AnacondaRecipes/menuinst-feedstock.git
+  sha: a306f3ce9df3ff7c9fd38a6bb332e2f6b1432998

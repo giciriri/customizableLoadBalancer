@@ -1,0 +1,38 @@
+{
+  "build": "haa95532_2",
+  "build_number": 2,
+  "channel": "https://repo.anaconda.com/pkgs/main/win-64",
+  "constrains": [
+    "anaconda-navigator >=1.9.8"
+  ],
+  "depends": [
+    "python"
+  ],
+  "extracted_package_dir": "D:\\customizableLoadBalancer\\libraries\\pkgs\\powershell_shortcut_miniconda-0.0.1-haa95532_2",
+  "files": [
+    "Menu/anaconda_powershell_console.ico",
+    "Menu/powershell_shortcut.json",
+    ".nonadmin",
+    "Menu/powershell_shortcut.json"
+  ],
+  "fn": "powershell_shortcut_miniconda-0.0.1-haa95532_2.conda",
+  "license": "BSD-3-Clause",
+  "link": {
+    "source": "D:\\customizableLoadBalancer\\libraries\\pkgs\\powershell_shortcut_miniconda-0.0.1-haa95532_2",
+    "type": 1
+  },
+  "md5": "59bb8090423226af076fd29f86911a85",
+  "name": "powershell_shortcut_miniconda",
+  "package_tarball_full_path": "D:\\customizableLoadBalancer\\libraries\\pkgs\\powershell_shortcut_miniconda-0.0.1-haa95532_2.conda",
+  "paths_data": {
+    "paths": [],
+    "paths_version": 1
+  },
+  "requested_spec": "defaults/win-64::powershell_shortcut_miniconda==0.0.1=haa95532_2[md5=59bb8090423226af076fd29f86911a85]",
+  "sha256": "3763b5b9040bd04a87ec7cf630047d29324e5ccb17bcc2f274ed0f1a9162f5ab",
+  "size": 29795,
+  "subdir": "win-64",
+  "timestamp": 1719000612000,
+  "url": "https://repo.anaconda.com/pkgs/main/win-64/powershell_shortcut_miniconda-0.0.1-haa95532_2.conda",
+  "version": "0.0.1"
+}

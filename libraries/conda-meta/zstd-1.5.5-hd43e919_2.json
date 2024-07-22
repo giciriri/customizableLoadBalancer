@@ -1,0 +1,62 @@
+{
+  "build": "hd43e919_2",
+  "build_number": 2,
+  "channel": "https://repo.anaconda.com/pkgs/main/win-64",
+  "constrains": [],
+  "depends": [
+    "lz4-c >=1.9.4,<1.10.0a0",
+    "vc >=14.1,<15.0a0",
+    "vs2015_runtime >=14.16.27012,<15.0a0",
+    "xz >=5.4.6,<6.0a0",
+    "zlib >=1.2.13,<1.3.0a0"
+  ],
+  "extracted_package_dir": "D:\\customizableLoadBalancer\\libraries\\pkgs\\zstd-1.5.5-hd43e919_2",
+  "files": [
+    "Library/bin/libzstd.dll",
+    "Library/bin/zstd.dll",
+    "Library/bin/zstd.exe",
+    "Library/include/zdict.h",
+    "Library/include/zstd.h",
+    "Library/include/zstd_errors.h",
+    "Library/lib/cmake/zstd/zstdConfig.cmake",
+    "Library/lib/cmake/zstd/zstdConfigVersion.cmake",
+    "Library/lib/cmake/zstd/zstdTargets-release.cmake",
+    "Library/lib/cmake/zstd/zstdTargets.cmake",
+    "Library/lib/libzstd.lib",
+    "Library/lib/libzstd_static.lib",
+    "Library/lib/pkgconfig/libzstd.pc",
+    "Library/lib/zstd.lib",
+    "Library/lib/zstd_static.lib",
+    ".nonadmin"
+  ],
+  "fn": "zstd-1.5.5-hd43e919_2.conda",
+  "license": "BSD-3-Clause AND GPL-2.0-or-later",
+  "link": {
+    "source": "D:\\customizableLoadBalancer\\libraries\\pkgs\\zstd-1.5.5-hd43e919_2",
+    "type": 1
+  },
+  "md5": "d662b0ef9ecc4dfef56cfae98a2bb7db",
+  "name": "zstd",
+  "package_tarball_full_path": "D:\\customizableLoadBalancer\\libraries\\pkgs\\zstd-1.5.5-hd43e919_2.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "Library/lib/pkgconfig/libzstd.pc",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "C:/b/abs_c993gkqu4s/croot/zstd_1714679075454/_h_env",
+        "sha256": "54bf444bf96562f761dfd274264c4c91983a99d5ec851d84215b4a702529edbd",
+        "sha256_in_prefix": "02587b4fa4e233315b13b40a21a40a3bbc5d917791df29dd25da2471f8607331",
+        "size_in_bytes": 519
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "defaults/win-64::zstd==1.5.5=hd43e919_2[md5=d662b0ef9ecc4dfef56cfae98a2bb7db]",
+  "sha256": "01cba6d8563cad2bf4b6e26ba8fa59221e47b9d2cd65249554a8afe5fe7cae0c",
+  "size": 737167,
+  "subdir": "win-64",
+  "timestamp": 1714679197000,
+  "url": "https://repo.anaconda.com/pkgs/main/win-64/zstd-1.5.5-hd43e919_2.conda",
+  "version": "1.5.5"
+}
