@@ -1,43 +1,39 @@
 import hashlib
 
 class ConsistentHashMap:
-    def __init__(self, N, M, K):
-        self.N = N
-        self.M = M
-        self.K = K
-        self.ring = {}
+    def __init__(self, num_slots=512, num_virtual_servers=92):
+        self.num_slots = num_slots
+        self.num_virtual_servers = num_virtual_servers
+        self.slots = [None] * num_slots
         self.servers = []
-        self._initialize_ring()
+        self.virtual_servers = {}
 
-    def _initialize_ring(self):
-        # Add virtual servers to the ring
-        for server_id in range(1, self.N + 1):
-            for i in range(self.K):
-                virtual_server_id = f"{server_id}_{i}"
-                self.servers.append(virtual_server_id)
-                hash_value = self._hash(virtual_server_id)
-                self.ring[hash_value] = virtual_server_id
+    def add_server(self, server_id):
+        self.servers.append(server_id)
+        for i in range(self.num_virtual_servers):
+            virtual_server_id = self.virtual_server_hash_function(server_id, i) % self.num_slots
+            self.virtual_servers[virtual_server_id] = server_id
+            self.slots[virtual_server_id] = server_id
+        print(f"Added server: {server_id}, Virtual servers: {[self.virtual_server_hash_function(server_id, i) % self.num_slots for i in range(self.num_virtual_servers)]}")
 
-    def _hash(self, key):
-        return int(hashlib.md5(key.encode()).hexdigest(), 16) % self.M
+    def remove_server(self, server_id):
+        self.servers.remove(server_id)
+        for i in range(self.num_virtual_servers):
+            virtual_server_id = self.virtual_server_hash_function(server_id, i) % self.num_slots
+            del self.virtual_servers[virtual_server_id]
+            self.slots[virtual_server_id] = None
+        print(f"Removed server: {server_id}")
 
-    def add_server(self, Sid):
-        for i in range(self.K):
-            virtual_server_id = f"{Sid}_{i}"
-            self.servers.append(virtual_server_id)
-            hash_value = self._hash(virtual_server_id)
-            self.ring[hash_value] = virtual_server_id
+    def get_server(self, key):
+        hash_value = self.hash_function(key) % self.num_slots
+        while self.slots[hash_value] is None:
+            hash_value = (hash_value + 1) % self.num_slots
+        print(f"Key: {key}, Hash Value: {hash_value}, Server: {self.slots[hash_value]}")
+        return self.slots[hash_value]
 
-    def remove_server(self, Sid):
-        for i in range(self.K):
-            virtual_server_id = f"{Sid}_{i}"
-            hash_value = self._hash(virtual_server_id)
-            if hash_value in self.ring:
-                del self.ring[hash_value]
-            if virtual_server_id in self.servers:
-                self.servers.remove(virtual_server_id)
+    @staticmethod
+    def hash_function(key):
+        return int(hashlib.md5(str(key).encode()).hexdigest(), 16)
 
-    def map_request(self, Rid):
-        hash_value = self._hash(Rid)
-        closest_server = min(self.ring.keys(), key=lambda k: (k - hash_value) % self.M)
-        return self.ring[closest_server]
+    def virtual_server_hash_function(self, server_id, i):
+        return self.hash_function(f"{server_id}-{i}")

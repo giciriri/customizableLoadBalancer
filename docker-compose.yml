@@ -1,33 +1,26 @@
 version: '3'
+
 services:
-  server1:
-    build:
-      context: .
-      dockerfile: server.Dockerfile
+  flask-server1:
+    image: my-flask-app
+    ports:
+      - "5000:5000"
+
+  flask-server2:
+    image: my-flask-app
     ports:
       - "5001:5000"
 
-  server2:
-    build:
-      context: .
-      dockerfile: server.Dockerfile
+  flask-server3:
+    image: my-flask-app
     ports:
       - "5002:5000"
 
-  server3:
-    build:
-      context: .
-      dockerfile: server.Dockerfile
-    ports:
-      - "5003:5000"
-
-  load_balancer:
-    build:
-      context: .
-      dockerfile: load_balancer.Dockerfile
+  load-balancer:
+    image: my-consistent-hash-load-balancer
     ports:
       - "4001:4001"
     depends_on:
-      - server1
-      - server2
-      - server3
+      - flask-server1
+      - flask-server2
+      - flask-server3
