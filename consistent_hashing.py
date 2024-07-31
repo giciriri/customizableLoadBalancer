@@ -1,39 +1,78 @@
 import hashlib
 
 class ConsistentHashMap:
-    def __init__(self, num_slots=512, num_virtual_servers=92):
-        self.num_slots = num_slots
-        self.num_virtual_servers = num_virtual_servers
-        self.slots = [None] * num_slots
-        self.servers = []
-        self.virtual_servers = {}
+    def __init__(self, N, M, K, hash_function=None, virtual_server_hash_function=None):
+        self.N = N  # Number of server containers managed by the load balancer
+        self.M = M  # Total number of slots in the consistent hash map
+        self.K = K  # Number of virtual servers for each server container
 
-    def add_server(self, server_id):
-        self.servers.append(server_id)
-        for i in range(self.num_virtual_servers):
-            virtual_server_id = self.virtual_server_hash_function(server_id, i) % self.num_slots
-            self.virtual_servers[virtual_server_id] = server_id
-            self.slots[virtual_server_id] = server_id
-        print(f"Added server: {server_id}, Virtual servers: {[self.virtual_server_hash_function(server_id, i) % self.num_slots for i in range(self.num_virtual_servers)]}")
+        self.hash_function = hash_function or self.default_hash_function
+        self.virtual_server_hash_function = virtual_server_hash_function or self.default_virtual_server_hash_function
 
-    def remove_server(self, server_id):
-        self.servers.remove(server_id)
-        for i in range(self.num_virtual_servers):
-            virtual_server_id = self.virtual_server_hash_function(server_id, i) % self.num_slots
-            del self.virtual_servers[virtual_server_id]
-            self.slots[virtual_server_id] = None
-        print(f"Removed server: {server_id}")
+        self.server_containers = [f'S{i}' for i in range(1, N + 1)]
+        self.virtual_servers = self.generate_virtual_servers()
+        self.hash_map = {slot: None for slot in range(M)}
+        self.populate_hash_map()
 
-    def get_server(self, key):
-        hash_value = self.hash_function(key) % self.num_slots
-        while self.slots[hash_value] is None:
-            hash_value = (hash_value + 1) % self.num_slots
-        print(f"Key: {key}, Hash Value: {hash_value}, Server: {self.slots[hash_value]}")
-        return self.slots[hash_value]
+    def default_hash_function(self, Rid):
+        md5 = hashlib.md5(str(Rid).encode())
+        return int(md5.hexdigest(), 16) % self.M
 
-    @staticmethod
-    def hash_function(key):
-        return int(hashlib.md5(str(key).encode()).hexdigest(), 16)
+    def default_virtual_server_hash_function(self, Sid, j):
+        md5 = hashlib.md5(f"{Sid}{j}".encode())
+        return int(md5.hexdigest(), 16) % self.M
 
-    def virtual_server_hash_function(self, server_id, i):
-        return self.hash_function(f"{server_id}-{i}")
+    def generate_virtual_servers(self):
+        virtual_servers = []
+        for i in range(1, self.N + 1):
+            for j in range(self.K):
+                virtual_servers.append(f'S{i}_{j}')
+        return virtual_servers
+
+    def populate_hash_map(self):
+        for server in self.server_containers:
+            self.add_server(server)
+
+    def add_server(self, Sid):
+        for j in range(self.K):
+            slot = self.virtual_server_hash_function(Sid, j)
+            while self.hash_map[slot] is not None:
+                slot = (slot + 1) % self.M
+            self.hash_map[slot] = f'{Sid}_{j}'
+
+    def remove_server(self, Sid):
+        for j in range(self.K):
+            virtual_server = f'{Sid}_{j}'
+            for slot, value in self.hash_map.items():
+                if value == virtual_server:
+                    self.hash_map[slot] = None
+                    break
+
+    def map_request(self, Rid):
+        slot = self.hash_function(Rid)
+        while self.hash_map[slot] is None:
+            slot = (slot + 1) % self.M
+        server_id = self.hash_map[slot]
+        return server_id
+
+    def get_server(self, Rid):
+        return self.map_request(Rid)
+
+    def debug_hash_map(self):
+        for slot, value in self.hash_map.items():
+            if value:
+                print(f"Slot {slot}: {value}")
+
+# Example usage
+if __name__ == "__main__":
+    N = 3
+    M = 512
+    K = 9
+    chm = ConsistentHashMap(N, M, K)
+
+    chm.debug_hash_map()
+
+    requests = [132574, 237891, 982345, 674512, 876234, 543289]
+    for Rid in requests:
+        server = chm.map_request(Rid)
+        print(f"Request {Rid} mapped to server {server}")

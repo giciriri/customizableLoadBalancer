@@ -1,23 +1,37 @@
-version: '3'
+version: '3.9'
 
 services:
   flask-server1:
-    image: my-flask-app
+    build:
+      context: .
+      dockerfile: app.Dockerfile
     ports:
       - "5000:5000"
+    environment:
+      - SERVER_ID=S1
 
   flask-server2:
-    image: my-flask-app
+    build:
+      context: .
+      dockerfile: app.Dockerfile
     ports:
       - "5001:5000"
+    environment:
+      - SERVER_ID=S2
 
   flask-server3:
-    image: my-flask-app
+    build:
+      context: .
+      dockerfile: app.Dockerfile
     ports:
       - "5002:5000"
+    environment:
+      - SERVER_ID=S3
 
   load-balancer:
-    image: my-consistent-hash-load-balancer
+    build:
+      context: .
+      dockerfile: load_balancer.Dockerfile
     ports:
       - "4001:4001"
     depends_on:

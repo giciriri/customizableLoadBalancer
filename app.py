@@ -1,18 +1,14 @@
-from flask import Flask, jsonify
 import os
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-# Get the unique identifier for this server instance from an environment variable
+# Set a unique server ID for each instance
 server_id = os.getenv('SERVER_ID', 'default-server-id')
 
 @app.route('/home', methods=['GET'])
 def home():
-    return jsonify({"server_id": server_id})
-
-@app.route('/heartbeat', methods=['GET'])
-def heartbeat():
-    return "OK", 200
+    return jsonify({"message": f"Server {server_id} is responding"})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

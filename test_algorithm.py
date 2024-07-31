@@ -1,45 +1,27 @@
-import requests
-import collections
+import random
 import matplotlib.pyplot as plt
-import time
 
-# Test that the algorithm is working
-print("Testing algorithm...")
+from consistent_hashing import ConsistentHashMap  # Import your consistent hashing implementation
 
-# Send a large number of requests to the load balancer
-requests_sent = 10
+# Create a consistent hash map with 3 servers and 512 slots
+hash_map = ConsistentHashMap(N=3, M=512, K=3)
 
-rid_values = [i for i in range(requests_sent)]
-server_counts = collections.defaultdict(int)
+# Generate 10,00 random user IDs (or requests)
+user_ids = [f"user_{random.randint(1, 10000)}" for _ in range(1000)]
 
-for rid in rid_values:
-    print(f"Sending request {rid}...")
-    start_time = time.time()
-    response = requests.post('http://localhost:4001/route', json={'Rid': rid})
-    end_time = time.time()
-    print(f"Request {rid} took {end_time - start_time:.2f} seconds")
-    server = response.json()['server']
-    server_counts[server] += 1
+# Hash each user ID and store the server ID
+server_ids = [hash_map.get_server(user_id) for user_id in user_ids]
 
-# Print the distribution of requests across virtual servers
-print("Distribution of requests across virtual servers:")
-for server, count in server_counts.items():
-    print(f"Server {server}: {count} requests ({count/requests_sent*100:.2f}%)")
+# Count the number of user IDs assigned to each server
+server_counts = {}
+for server_id in server_ids:
+    if server_id not in server_counts:
+        server_counts[server_id] = 0
+    server_counts[server_id] += 1
 
-# Create a bar chart showing the distribution of requests
-servers = list(server_counts.keys())
-request_counts = list(server_counts.values())
-plt.bar(servers, request_counts)
+# Plot the distribution of user IDs across servers
+plt.bar(server_counts.keys(), server_counts.values())
 plt.xlabel('Server ID')
-plt.ylabel('Number of Requests')
-plt.title('Distribution of Requests Across Virtual Servers')
+plt.ylabel('Number of User IDs')
+plt.title('Consistent Hashing Distribution')
 plt.show()
-
-# Verify that the distribution is relatively even
-max_deviation = 0.1  # 10% deviation from uniform distribution
-uniform_distribution = requests_sent / len(server_counts)
-for server, count in server_counts.items():
-    deviation = abs(count - uniform_distribution) / uniform_distribution
-    assert deviation < max_deviation, f"Server {server} has a deviation of {deviation:.2f} from uniform distribution"
-
-print("Algorithm test passed!")
