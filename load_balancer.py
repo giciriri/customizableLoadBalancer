@@ -15,14 +15,24 @@ server_name_map = {
     'S2_2': 'flask-server2:5000',
     'S3_0': 'flask-server3:5000',
     'S3_1': 'flask-server3:5000',
-    'S3_2': 'flask-server3:5000'
+    'S3_2': 'flask-server3:5000',
+    # Add servers for S4, S5, and S6 (these are not actually used in this example)
+    'S4_0': 'flask-server4:5000', 
+    'S4_1': 'flask-server4:5000',
+    'S4_2': 'flask-server4:5000',
+    'S5_0': 'flask-server5:5000', 
+    'S5_1': 'flask-server5:5000',
+    'S5_2': 'flask-server5:5000',
+    'S6_0': 'flask-server6:5000', 
+    'S6_1': 'flask-server6:5000',
+    'S6_2': 'flask-server6:5000' 
 }
 
-# Initialize the consistent hash map
+# Initialize the consistent hash map with 3 real servers (N=3) and 9 virtual servers (K=9)
 hash_map = ConsistentHashMap(
-    N=3,  # Number of server containers
+    N=3,  # Number of server containers (3 real servers)
     M=512,  # Number of slots in the consistent hash map
-    K=3  # Number of virtual servers
+    K=9  # Number of virtual servers (9 virtual servers)
 )
 
 @app.route('/home', methods=['GET'])
@@ -51,4 +61,4 @@ def forward():
         return jsonify({"error": "Failed to connect to server"}), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=4001)
+    app.run(host='0.0.0.0', port=4001) 
