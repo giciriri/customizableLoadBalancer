@@ -6,11 +6,11 @@ class ConsistentHashMap:
         Initializes a ConsistentHashMap object.
 
         Args:
-            N: The number of server containers managed by the load balancer.
-            M: The total number of slots in the consistent hash map.
-            K: The number of virtual servers for each server container.
-            hash_function: An optional custom hash function for mapping requests to slots.
-            virtual_server_hash_function: An optional custom hash function for mapping virtual servers to slots.
+            N: Number of server containers managed by the load balancer.
+            M: Total number of slots in the consistent hash map.
+            K: Number of virtual servers for each server container.
+            hash_function: Optional custom hash function for mapping requests to slots.
+            virtual_server_hash_function: Optional custom hash function for mapping virtual servers to slots.
         """
         self.N = N
         self.M = M
@@ -104,7 +104,7 @@ class ConsistentHashMap:
 if __name__ == "__main__":
     N = 3
     M = 512
-    K = 9
+    K = 3
     chm = ConsistentHashMap(N, M, K)
 
     chm.debug_hash_map()
@@ -112,4 +112,4 @@ if __name__ == "__main__":
     requests = [132574, 237891, 982345, 674512, 876234, 543289]
     for Rid in requests:
         server = chm.map_request(Rid)
-        print(f"Request {Rid} mapped to server {server}") 
+        print(f"Request {Rid} mapped to server {server}")

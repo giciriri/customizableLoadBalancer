@@ -1,40 +1,36 @@
-version: '3.9'
+version: '3.8'
 
 services:
   flask-server1:
     build:
-      context: .
-      dockerfile: app.Dockerfile
-    ports:
-      - "5000:5000"
+      context: .  # Directory containing your Dockerfile
+      dockerfile: app.Dockerfile  # Specify the Dockerfile name
     environment:
-      - SERVER_ID=S1
+      - SERVER_ID=Server1  # Updated to match your server ID convention
+    ports:
+      - "5001:5000"  # Maps container port 5000 to host port 5001
 
   flask-server2:
     build:
-      context: .
-      dockerfile: app.Dockerfile
-    ports:
-      - "5001:5000"
+      context: .  # Directory containing your Dockerfile
+      dockerfile: app.Dockerfile  # Specify the Dockerfile name
     environment:
-      - SERVER_ID=S2
+      - SERVER_ID=Server2  # Updated to match your server ID convention
+    ports:
+      - "5002:5000"  # Maps container port 5000 to host port 5002
 
   flask-server3:
     build:
-      context: .
-      dockerfile: app.Dockerfile
-    ports:
-      - "5002:5000"
+      context: .  # Directory containing your Dockerfile
+      dockerfile: app.Dockerfile  # Specify the Dockerfile name
     environment:
-      - SERVER_ID=S3
+      - SERVER_ID=Server3  # Updated to match your server ID convention
+    ports:
+      - "5003:5000"  # Maps container port 5000 to host port 5003
 
   load-balancer:
     build:
-      context: .
-      dockerfile: load_balancer.Dockerfile
+      context: .  # Directory containing your Dockerfile
+      dockerfile: load_balancer.Dockerfile  # Specify the Dockerfile name
     ports:
-      - "4001:4001"
-    depends_on:
-      - flask-server1
-      - flask-server2
-      - flask-server3
+      - "4001:4001"  # Maps container port 4001 to host port 4001
