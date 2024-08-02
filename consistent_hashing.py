@@ -20,7 +20,7 @@ class ConsistentHashMap:
 
         self.server_containers = [f'S{i}' for i in range(1, N + 1)]
         self.virtual_servers = self.generate_virtual_servers()
-        self.hash_map = [None] * M  # Use a list for efficient slot access
+        self.hash_map = [None] * M
         self.populate_hash_map()
 
     def default_hash_function(self, Rid):
@@ -51,6 +51,7 @@ class ConsistentHashMap:
         """
         Populates the hash map with virtual servers.
         """
+        self.hash_map = [None] * self.M
         for server in self.server_containers:
             self.add_server(server)
 
@@ -99,17 +100,10 @@ class ConsistentHashMap:
             if value:
                 print(f"Slot {slot}: {value}")
 
-
-# Example usage
-if __name__ == "__main__":
-    N = 3
-    M = 512
-    K = 3
-    chm = ConsistentHashMap(N, M, K)
-
-    chm.debug_hash_map()
-
-    requests = [132574, 237891, 982345, 674512, 876234, 543289]
-    for Rid in requests:
-        server = chm.map_request(Rid)
-        print(f"Request {Rid} mapped to server {server}")
+    def update_servers(self, new_servers):
+        """
+        Updates the list of server containers and re-populates the hash map.
+        """
+        self.server_containers = new_servers
+        self.virtual_servers = self.generate_virtual_servers()
+        self.populate_hash_map()
