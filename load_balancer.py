@@ -5,17 +5,11 @@ from consistent_hashing import ConsistentHashMap
 
 app = Flask(__name__)
 
-# Define the server ID mappings for 3 physical servers
+# Define the server ID mappings for virtual servers to physical servers
 server_name_map = {
-    'S1_0': 'flask-server1:5000',
-    'S1_1': 'flask-server1:5000',
-    'S1_2': 'flask-server1:5000',
-    'S2_0': 'flask-server2:5000',
-    'S2_1': 'flask-server2:5000',
-    'S2_2': 'flask-server2:5000',
-    'S3_0': 'flask-server3:5000',
-    'S3_1': 'flask-server3:5000',
-    'S3_2': 'flask-server3:5000',
+    'S1': 'flask-server1:5000',
+    'S2': 'flask-server2:5000',
+    'S3': 'flask-server3:5000',
 }
 
 # Initialize the consistent hash map with 3 real servers and 9 virtual servers
@@ -35,7 +29,7 @@ def forward():
     server_id = hash_map.get_server(request_id)
     
     if server_id not in server_name_map:
-        app.logger.error(f"Server ID '{server_id}' not found in name map")
+        app.logger.error(f"Unexpected server_id received: {server_id}")
         return jsonify({"error": "Server not found"}), 500
     
     server_url = f"http://{server_name_map[server_id]}/home"
@@ -43,24 +37,30 @@ def forward():
     try:
         response = requests.get(server_url)
         response.raise_for_status()  # Ensure we notice bad responses
-        return jsonify(response.json())
+        
+        # Return the response along with the server ID
+        return jsonify({
+            "server_id": server_id,
+            "message": response.json().get('message', 'No message in response')
+        })
     except requests.RequestException as e:
         app.logger.error(f"Error forwarding request to {server_url}: {e}")
-        # Try to forward request to another server
         return handle_forward_error()
 
 def handle_forward_error():
-    # Attempt to find another server and forward the request
-    available_servers = [server for server in server_name_map.values() if is_server_healthy(server)]
+    available_servers = [f"http://{server}" for server in server_name_map.values() if is_server_healthy(f"http://{server}")]
     if not available_servers:
+        app.logger.error("All servers are down")
         return jsonify({"error": "All servers are down"}), 502
 
-    # Randomly select an available server
     server_url = random.choice(available_servers) + '/home'
     try:
         response = requests.get(server_url)
         response.raise_for_status()
-        return jsonify(response.json())
+        return jsonify({
+            "server_id": "BackupServer",
+            "message": response.json().get('message', 'No message in response')
+        })
     except requests.RequestException as e:
         app.logger.error(f"Error forwarding request to backup server {server_url}: {e}")
         return jsonify({"error": "Failed to connect to any server"}), 502
@@ -76,6 +76,11 @@ def is_server_healthy(server_url):
 def update_servers():
     server_list = request.json.get('servers', [])
     hash_map.update_servers(server_list)
+    
+    # Update server_name_map based on the new server list
+    global server_name_map
+    server_name_map = {server: f'flask-server{server[1]}:5000' for server in server_list}
+    
     return jsonify({"message": "Server list updated"}), 200
 
 @app.route('/server_status/<server_id>', methods=['POST'])
@@ -93,3 +98,4 @@ def update_server_status(server_id):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=4001)
+
