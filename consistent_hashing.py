@@ -1,66 +1,78 @@
 import hashlib
 
 class ConsistentHashMap:
-    def __init__(self, N, M, K, hash_function=None, virtual_server_hash_function=None):
+    def __init__(self, server_containers, N=3, K=9, M=512):
+        self.server_containers = server_containers
+        self.unhealthy_servers = set()  # Track unhealthy servers
         self.N = N
-        self.M = M
         self.K = K
-        self.hash_function = hash_function or self.default_hash_function
-        self.virtual_server_hash_function = virtual_server_hash_function or self.default_virtual_server_hash_function
-
-        self.server_containers = [f'S{i}' for i in range(1, N + 1)]
-        self.virtual_servers = self.generate_virtual_servers()
+        self.M = M
         self.hash_map = [None] * M
         self.populate_hash_map()
 
-    def default_hash_function(self, Rid):
-        md5 = hashlib.md5(str(Rid).encode())
-        return int(md5.hexdigest(), 16) % self.M
-
-    def default_virtual_server_hash_function(self, Sid, j):
-        md5 = hashlib.md5(f"{Sid}{j}".encode())
-        return int(md5.hexdigest(), 16) % self.M
-
-    def generate_virtual_servers(self):
-        virtual_servers = []
-        for i in range(1, self.N + 1):
-            for j in range(self.K):
-                virtual_servers.append(f'{i}_{j}')
-        return virtual_servers
+    def default_virtual_server_hash_function(self, server_id, index):
+        return int(hashlib.md5(f"{server_id}_{index}".encode()).hexdigest(), 16) % self.M
 
     def populate_hash_map(self):
         self.hash_map = [None] * self.M
         for server in self.server_containers:
-            self.add_server(server)
+            if server not in self.unhealthy_servers:
+                self.add_server(server)
+        self.print_hash_map()
 
-    def add_server(self, Sid):
+    def add_server(self, server_id):
+        print(f"Adding server: {server_id}")  # Debugging line
         for j in range(self.K):
-            slot = self.virtual_server_hash_function(Sid, j)
-            while self.hash_map[slot] is not None:
-                slot = (slot + 1) % self.M
-            self.hash_map[slot] = f'{Sid}_{j}'
-
-    def remove_server(self, Sid):
-        for j in range(self.K):
-            virtual_server = f'{Sid}_{j}'
-            for slot, value in enumerate(self.hash_map):
-                if value == virtual_server:
-                    self.hash_map[slot] = None
+            virtual_server = f'{server_id}_{j}'
+            slot = self.default_virtual_server_hash_function(server_id, j)
+            for probe in range(self.M):
+                idx = (slot + probe**2) % self.M
+                if self.hash_map[idx] is None:
+                    self.hash_map[idx] = virtual_server
+                    print(f"Assigned {virtual_server} to slot {idx}")  # Debugging line
                     break
+            else:
+                print(f"Failed to place {virtual_server}")  # Debugging line
 
-    def map_request(self, Rid):
-        slot = self.hash_function(Rid)
-        while self.hash_map[slot] is None:
-            slot = (slot + 1) % self.M
-        return self.hash_map[slot]
+    def mark_server_unhealthy(self, server_id):
+        self.unhealthy_servers.add(server_id)
+        self.repopulate_hash_map()
 
-    def get_server(self, Rid):
-        virtual_server = self.map_request(Rid)
-        # Extract the base server ID from virtual server ID
-        server_id = virtual_server.split('_')[0]
-        return server_id
-    
-    def update_servers(self, new_servers):
-        self.server_containers = new_servers
-        self.virtual_servers = self.generate_virtual_servers()
-        self.populate_hash_map()
+    def repopulate_hash_map(self):
+        self.hash_map = [None] * self.M
+        for server in self.server_containers:
+            if server not in self.unhealthy_servers:
+                self.add_server(server)
+        self.print_hash_map()
+
+    def print_hash_map(self):
+        assigned = [slot for slot in self.hash_map if slot is not None]
+        unassigned = self.hash_map.count(None)
+        print(f"Hash map status:\nAssigned slots: {len(assigned)}\nUnassigned slots: {unassigned}")
+        print("Sample hash map content (showing first 20 entries):")
+        for i, slot in enumerate(self.hash_map[:20]):
+            print(f"Slot {i}: {slot}")
+
+    def visualize_hash_map(self):
+        import matplotlib.pyplot as plt
+        
+        slots = range(self.M)
+        counts = [0] * self.M
+        for slot in self.hash_map:
+            if slot is not None:
+                idx = self.default_virtual_server_hash_function(slot.split('_')[0], int(slot.split('_')[1]))
+                counts[idx] += 1
+        
+        plt.bar(slots, counts)
+        plt.xlabel('Hash Map Slot')
+        plt.ylabel('Number of Virtual Servers')
+        plt.title('Virtual Server Distribution in Hash Map')
+        plt.show()
+
+    def get_server(self, request_id):
+        slot = self.default_virtual_server_hash_function(request_id, 0)  # Example usage
+        for probe in range(self.M):
+            idx = (slot + probe**2) % self.M
+            if self.hash_map[idx] is not None:
+                return self.hash_map[idx]
+        return None

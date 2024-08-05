@@ -1,55 +1,81 @@
 import requests
 import matplotlib.pyplot as plt
-import pandas as pd
-from collections import Counter
+import numpy as np
 
-# Configuration
-load_balancer_url = 'http://localhost:4001/forward'  # Update if necessary
-num_requests = 1000
-
-# Variables to store the results
-responses = []
-
-def send_requests(num):
-    for _ in range(num):
+def get_available_servers(server_urls):
+    """ Check which servers are currently available. """
+    available_servers = {}
+    for label, url in server_urls.items():
+        print(f"Checking {label} at {url}")  # Debugging line
         try:
-            response = requests.get(load_balancer_url)
-            data = response.json()
-            server_id = data.get('server_id', 'Unknown')
-            responses.append(server_id)
+            response = requests.get(f"{url}/home", timeout=10)
+            if response.status_code == 200:
+                available_servers[label] = url
+            else:
+                print(f"{label} responded with status code: {response.status_code}")
         except requests.RequestException as e:
-            print(f"Request failed: {e}")
+            print(f"{label} is currently unavailable. Error: {e}")
+    return available_servers
 
-def analyze_results():
-    # Count the occurrences of each server ID
-    counter = Counter(responses)
+def simulate_requests(servers, num_requests=1000):
+    """ Simulate requests and count distribution to available servers. """
+    request_counts = {server: 0 for server in servers}
     
-    # Create a DataFrame for better handling
-    df = pd.DataFrame(counter.items(), columns=['Server', 'Count'])
-    df = df.sort_values(by='Count', ascending=False)
+    for _ in range(num_requests):
+        server = np.random.choice(list(servers.values()))
+        try:
+            response = requests.get(f"{server}/home", timeout=5)
+            if response.ok:
+                server_label = response.json().get('message', 'Unknown').split()[1]
+                request_counts[server_label] += 1
+        except requests.RequestException as e:
+            print(f"Request to {server} failed. Error: {e}")
     
-    return df
+    return request_counts
 
-def plot_results(df):
-    # Plotting the results
-    plt.figure(figsize=(10, 6))
-    plt.bar(df['Server'], df['Count'], color='skyblue')
-    plt.xlabel('Server ID')
-    plt.ylabel('Request Count')
-    plt.title('Request Distribution Across Servers')
-    plt.xticks(rotation=45)
-    plt.tight_layout()
+def plot_distribution(distribution):
+    """ Plot the distribution of requests. """
+    labels = distribution.keys()
+    counts = distribution.values()
+
+    plt.bar(labels, counts)
+    plt.xlabel('Server')
+    plt.ylabel('Number of Requests')
+    plt.title('Request Distribution')
     plt.show()
 
+def main():
+    server_urls = {
+        'Server1': 'http://localhost:5001',
+        'Server2': 'http://localhost:5002',
+        'Server3': 'http://localhost:5003'
+    }
+    
+    print("Testing with all servers up...")
+    available_servers = get_available_servers(server_urls)
+    
+    if available_servers:
+        request_counts = simulate_requests(available_servers)
+        print("Request Distribution Summary:")
+        for server, count in request_counts.items():
+            print(f"{server}: {count} requests")
+        plot_distribution(request_counts)
+    else:
+        print("No servers are available. Test cannot proceed.")
+    
+    input("Stop a server and press Enter to continue...")
+
+    print("Testing after stopping one server...")
+    available_servers = get_available_servers(server_urls)
+    
+    if available_servers:
+        request_counts = simulate_requests(available_servers)
+        print("Request Distribution Summary:")
+        for server, count in request_counts.items():
+            print(f"{server}: {count} requests")
+        plot_distribution(request_counts)
+    else:
+        print("No servers are available. Test cannot proceed.")
+
 if __name__ == "__main__":
-    print("Starting load balancer testing...")
-    send_requests(num_requests)
-    
-    print("Analyzing results...")
-    results_df = analyze_results()
-    
-    print("Summary of request distribution:")
-    print(results_df)
-    
-    print("Generating visualization...")
-    plot_results(results_df)
+    main()
