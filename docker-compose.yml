@@ -28,6 +28,15 @@ services:
     ports:
       - "5003:5000"  # Maps container port 5000 to host port 5003
 
+  flask-server4:
+    build:
+      context: .  # Directory containing your Dockerfile
+      dockerfile: app.Dockerfile  # Specify the Dockerfile name
+    environment:
+      - SERVER_ID=Server4  # Updated to match your server ID convention
+    ports:
+      - "5004:5000"  # Maps container port 5000 to host port 5004
+
   load-balancer:
     build:
       context: .  # Directory containing your Dockerfile

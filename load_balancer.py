@@ -15,17 +15,34 @@ def forward():
     request_id = request.args.get('id', default='default_id', type=str)
     server_id = hash_map.get_server(request_id)
     if server_id:
-        return jsonify({'message': 'Request forwarded to {}'.format(server_id)})
+        return jsonify({'message': f'Request forwarded to {server_id}'})
     else:
         return jsonify({'message': 'Server not found'}), 404
 
 @app.route('/update_servers', methods=['POST'])
 def update_servers():
-    # Example: Update the server containers list
-    global hash_map
     new_servers = request.json.get('servers', [])
+    global hash_map
     hash_map = ConsistentHashMap(server_containers=new_servers)
     return jsonify({'message': 'Servers updated successfully'})
+
+@app.route('/add_server', methods=['POST'])
+def add_server():
+    server_id = request.json.get('server_id', '')
+    if server_id not in hash_map.server_containers:
+        hash_map.add_server(server_id)
+        return jsonify({'message': f'{server_id} added successfully'})
+    else:
+        return jsonify({'message': f'Server {server_id} already exists'}), 400
+
+@app.route('/remove_server', methods=['POST'])
+def remove_server():
+    server_id = request.json.get('server_id', '')
+    if server_id in hash_map.server_containers:
+        hash_map.remove_server(server_id)
+        return jsonify({'message': f'{server_id} removed successfully'})
+    else:
+        return jsonify({'message': f'Server {server_id} not found'}), 404
 
 @app.route('/server_status', methods=['GET'])
 def server_status():
@@ -34,13 +51,9 @@ def server_status():
 @app.route('/mark_unhealthy', methods=['POST'])
 def mark_unhealthy():
     server_id = request.json.get('server_id', '')
-    # Identify physical server from the virtual server ID if needed
-    physical_server_id = server_id.split('_')[0]
-    
-    if physical_server_id in hash_map.server_containers:
-        # Mark the server as unhealthy
-        hash_map.mark_server_unhealthy(physical_server_id)
-        return jsonify({'message': f'{physical_server_id} is marked as unhealthy'})
+    if server_id in hash_map.server_containers:
+        hash_map.mark_server_unhealthy(server_id)
+        return jsonify({'message': f'{server_id} is marked as unhealthy'})
     else:
         return jsonify({'message': 'Server not found'}), 404
 

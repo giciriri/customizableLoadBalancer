@@ -34,8 +34,30 @@ class ConsistentHashMap:
             else:
                 print(f"Failed to place {virtual_server}")  # Debugging line
 
+    def remove_server(self, server_id):
+        print(f"Removing server: {server_id}")  # Debugging line
+        for j in range(self.K):
+            virtual_server = f'{server_id}_{j}'
+            slot = self.default_virtual_server_hash_function(server_id, j)
+            for probe in range(self.M):
+                idx = (slot + probe**2) % self.M
+                if self.hash_map[idx] == virtual_server:
+                    self.hash_map[idx] = None
+                    print(f"Removed {virtual_server} from slot {idx}")  # Debugging line
+                    break
+
+    def add_new_server(self, server_id):
+        """Add a new server to the hash map and update the hash map."""
+        if server_id not in self.server_containers:
+            self.server_containers.append(server_id)
+            self.populate_hash_map()
+            print(f"New server {server_id} added and hash map updated.")
+        else:
+            print(f"Server {server_id} already exists.")
+
     def mark_server_unhealthy(self, server_id):
         self.unhealthy_servers.add(server_id)
+        self.remove_server(server_id)
         self.repopulate_hash_map()
 
     def repopulate_hash_map(self):
