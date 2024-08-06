@@ -26,7 +26,7 @@ class ConsistentHashMap:
             virtual_server = f'{server_id}_{j}'
             slot = self.default_virtual_server_hash_function(server_id, j)
             for probe in range(self.M):
-                idx = (slot + probe**2) % self.M
+                idx = (slot + probe) % self.M
                 if self.hash_map[idx] is None:
                     self.hash_map[idx] = virtual_server
                     print(f"Assigned {virtual_server} to slot {idx}")  # Debugging line
@@ -40,11 +40,15 @@ class ConsistentHashMap:
             virtual_server = f'{server_id}_{j}'
             slot = self.default_virtual_server_hash_function(server_id, j)
             for probe in range(self.M):
-                idx = (slot + probe**2) % self.M
+                idx = (slot + probe) % self.M
                 if self.hash_map[idx] == virtual_server:
                     self.hash_map[idx] = None
                     print(f"Removed {virtual_server} from slot {idx}")  # Debugging line
                     break
+        # Remove server from containers
+        if server_id in self.server_containers:
+            self.server_containers.remove(server_id)
+        self.print_hash_map()
 
     def add_new_server(self, server_id):
         """Add a new server to the hash map and update the hash map."""
@@ -56,9 +60,13 @@ class ConsistentHashMap:
             print(f"Server {server_id} already exists.")
 
     def mark_server_unhealthy(self, server_id):
-        self.unhealthy_servers.add(server_id)
-        self.remove_server(server_id)
-        self.repopulate_hash_map()
+        if server_id in self.server_containers:
+            self.unhealthy_servers.add(server_id)
+            self.remove_server(server_id)
+            self.repopulate_hash_map()
+            print(f"Server {server_id} marked as unhealthy.")
+        else:
+            print(f"Server {server_id} not found in active servers.")
 
     def repopulate_hash_map(self):
         self.hash_map = [None] * self.M
@@ -94,7 +102,7 @@ class ConsistentHashMap:
     def get_server(self, request_id):
         slot = self.default_virtual_server_hash_function(request_id, 0)  # Example usage
         for probe in range(self.M):
-            idx = (slot + probe**2) % self.M
+            idx = (slot + probe) % self.M
             if self.hash_map[idx] is not None:
                 return self.hash_map[idx]
         return None
