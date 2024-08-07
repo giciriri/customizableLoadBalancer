@@ -17,7 +17,7 @@ def get_available_servers(server_urls):
             print(f"{label} is currently unavailable. Error: {e}")
     return available_servers
 
-def simulate_requests(servers, num_requests=1000):
+def simulate_requests(servers, num_requests=10000):
     """ Simulate requests and count distribution to available servers. """
     request_counts = {server: 0 for server in servers}
     

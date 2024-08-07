@@ -54,7 +54,7 @@ def remove_server():
 
 @app.route('/list_servers', methods=['GET'])
 def list_servers():
-    servers = hash_map.get_all_servers()
+    servers = hash_map.server_containers  # Adjusted to match method in ConsistentHashMap
     return jsonify({"servers": servers}), 200
 
 @app.route('/mark_unhealthy', methods=['POST'])
